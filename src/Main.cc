@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <bits/stdc++.h>
 #include "../include/Command.hpp"
 #include "../include/FilaEncadeada.hpp"
 
@@ -11,7 +12,6 @@ int main(int argc, char *argv[])
     mapInput >> x >> y;
     int i = 0, j = 0;
     std::string map[std::stoi(x)][std::stoi(y)];
-    std::cout << x << " " << y << std::endl;
     size_t pos = 0;
     std::string token;
     std::string delimiter = " ";
@@ -27,17 +27,37 @@ int main(int argc, char *argv[])
         i = 0;
         j++;
     }
-    return 0;
 
     std::ifstream commandInput("./exemplos_extras/ex_0/comandos.txt");
     FilaEncadeada FilaDeComandos = FilaEncadeada();
     for (std::string line; getline(commandInput, line);)
     {
-        while ((pos = line.find(delimiter)) != std::string::npos)
-        {
-            token = line.substr(0, pos);
-            std::cout << token << std::endl;
-            line.erase(0, pos + delimiter.length());
+        int hasPositions = 0;
+        Command item = Command();
+        std::istringstream teste(line);
+        std::string aux;
+        std::cout << teste.width() << std::endl;
+        while(teste >> aux) {
+            if (hasPositions == 1) {
+                item.setNome(aux);
+            }
+            if (hasPositions == 2) {
+                item.setNumRobo(std::stoi(aux));
+            }
+            if (hasPositions == 3) {
+                int linhaX = aux.at(1);
+                int colunaY = aux.at(3);
+                item.setLinhaX(linhaX);
+                item.setColunaY(colunaY);
+            } else {
+                item.setLinhaX(-1);
+                item.setColunaY(-1);
+            }
+            hasPositions++;
         }
+        FilaDeComandos.Enfilera(item);
+        // std::cout << line << std::endl;
+
     }
+    return 0;
 }
