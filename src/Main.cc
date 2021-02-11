@@ -4,14 +4,24 @@
 #include <bits/stdc++.h>
 #include "../include/Command.hpp"
 #include "../include/FilaEncadeada.hpp"
+#include "../include/FilaRobos.hpp"
+#include "../include/Robo.hpp"
+#include "../include/Base.hpp"
 
 int main(int argc, char *argv[])
 {
     std::ifstream mapInput("./exemplos_extras/ex_0/mapa.txt");
     std::string x, y;
     mapInput >> x >> y;
+    int linhas = stoi(x);
+    int colunas = stoi(y);
     int i = 0, j = 0;
-    std::string map[std::stoi(x)][std::stoi(y)];
+    std::string **map;
+    map = (std::string **)malloc(sizeof(std::string *) * linhas);
+    for (int i = 0; i < colunas; i++)
+    {
+        map[i] = (std::string *)malloc(sizeof(std::string) * colunas);
+    }
     size_t pos = 0;
     std::string token;
     std::string delimiter = " ";
@@ -36,28 +46,48 @@ int main(int argc, char *argv[])
         Command item = Command();
         std::istringstream teste(line);
         std::string aux;
-        std::cout << teste.width() << std::endl;
-        while(teste >> aux) {
-            if (hasPositions == 1) {
+        while (teste >> aux)
+        {
+            if (hasPositions == 0)
+            {
                 item.setNome(aux);
+                hasPositions++;
+                continue;
             }
-            if (hasPositions == 2) {
+            if (hasPositions == 1)
+            {
                 item.setNumRobo(std::stoi(aux));
+                hasPositions++;
+                continue;
             }
-            if (hasPositions == 3) {
-                int linhaX = aux.at(1);
-                int colunaY = aux.at(3);
-                item.setLinhaX(linhaX);
-                item.setColunaY(colunaY);
-            } else {
+            if (hasPositions == 2)
+            {
+                char linhaX = aux.at(1);
+                char colunaY = aux.at(3);
+                item.setLinhaX(linhaX - '0');
+                item.setColunaY(colunaY - '0');
+                hasPositions++;
+                continue;
+            }
+            else
+            {
                 item.setLinhaX(-1);
                 item.setColunaY(-1);
+                hasPositions++;
             }
-            hasPositions++;
         }
         FilaDeComandos.Enfilera(item);
-        // std::cout << line << std::endl;
+    }
+    FilaRobos FilaDeRobosAux = FilaRobos();
+    FilaDeRobosAux.CreateRobos();
+    Base BaseEspacial = Base();
+    BaseEspacial.SetBase(map, linhas, colunas, FilaDeComandos, FilaDeRobosAux);
 
+    while (!BaseEspacial.FileDeComandos.Vazia())
+    {
+        Command aux = FilaDeComandos.Desenfilera();
+        aux.Imprime();
+        std::cout << "-----------------" << std::endl;
     }
     return 0;
 }
