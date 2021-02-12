@@ -25,17 +25,28 @@ int main(int argc, char *argv[])
     size_t pos = 0;
     std::string token;
     std::string delimiter = " ";
+    i = 0, j = 0;
     for (std::string line; getline(mapInput, line);)
     {
-        while ((pos = line.find(delimiter)) != std::string::npos)
+        for (int positions = 0; positions < line.length(); positions++)
         {
-            token = line.substr(0, pos);
-            map[i][j] = token;
-            line.erase(0, pos + delimiter.length());
-            i++;
+            char das = line[positions];
+            if (das != ' ')
+            {
+                map[i][j] = das;
+                j++;
+            }
         }
-        i = 0;
-        j++;
+        // while ((pos = line.find(delimiter)) != std::string::npos)
+        // {
+        //     std::cout << token;
+        //     token = line.substr(0, pos);
+        //     map[i][j] = token;
+        //     line.erase(0, pos + delimiter.length());
+        //     j++;
+        // }
+        j = 0;
+        i++;
     }
 
     std::ifstream commandInput("./exemplos_extras/ex_0/comandos.txt");
@@ -83,11 +94,20 @@ int main(int argc, char *argv[])
     Base BaseEspacial = Base();
     BaseEspacial.SetBase(map, linhas, colunas, FilaDeComandos, FilaDeRobosAux);
 
-    while (!BaseEspacial.FileDeComandos.Vazia())
+    // while (!BaseEspacial.FileDeComandos.Vazia())
+    // {
+    //     Command aux = FilaDeComandos.Desenfilera();
+    //     aux.Imprime();
+    //     std::cout << "-----------------" << std::endl;
+    // }
+
+    for (int a = 0; a < linhas; a++)
     {
-        Command aux = FilaDeComandos.Desenfilera();
-        aux.Imprime();
-        std::cout << "-----------------" << std::endl;
+        for (int b = 0; b < colunas; b++)
+        {
+            std::cout << map[a][b];
+        }
+        std::cout << std::endl;
     }
     return 0;
 }
