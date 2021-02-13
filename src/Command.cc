@@ -16,6 +16,26 @@ Command::Command(std::string nome, int numRobo, int linhaX, int colunaY)
     this->colunaY = colunaY;
 }
 
+int Command::GetNumRoboCommand()
+{
+    return this->numRobo;
+}
+
+int Command::GetLinhaX()
+{
+    return this->linhaX;
+}
+
+int Command::GetColunaY()
+{
+    return this->colunaY;
+}
+
+std::string Command::GetNome()
+{
+    return this->nome;
+}
+
 Command Command::GetCommand()
 {
     std::string nome = this->nome;

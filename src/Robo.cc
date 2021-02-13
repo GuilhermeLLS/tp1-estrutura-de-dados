@@ -3,8 +3,8 @@
 Robo::Robo()
 {
     this->numRobo = 0;
-    this->linhaX = 0;
-    this->colunaY = 0;
+    this->linhaX = -1;
+    this->colunaY = -1;
     this->ativo = false;
     this->relatorio = "";
     this->totalRecursos = 0;
@@ -31,6 +31,19 @@ void Robo::SetCoordenadas(int linhaX, int colunaY)
 {
     this->linhaX = linhaX;
     this->colunaY = colunaY;
+}
+
+int Robo::GetNumRobo() {
+    return this->numRobo;
+}
+
+void Robo::ImprimeRobo() {
+    std::cout << "Num: " << this->numRobo << std::endl;
+    std::cout << "LinhaX: " << this->linhaX << std::endl;
+    std::cout << "ColunaY: " << this->colunaY << std::endl;
+    std::cout << "Ativo: " << this->ativo << std::endl;
+    std::cout << "TotalRecursos: " << this->totalRecursos << std::endl;
+    std::cout << "TotalAliens: " << this->totalAliens << std::endl;
 }
 
 void Robo::SetAtivo()

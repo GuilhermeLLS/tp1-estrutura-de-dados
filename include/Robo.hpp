@@ -17,6 +17,8 @@ public:
     void SetAliens();
     void SetRelatorio(std::string relatorio);
     void ImprimeRelatorio();
+    int GetNumRobo();
+    void ImprimeRobo();
 
 protected:
     int numRobo;
@@ -26,6 +28,8 @@ protected:
     std::string relatorio;
     int totalRecursos;
     int totalAliens;
+
+    friend class ListaRobos;
 };
 
 #endif

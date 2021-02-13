@@ -2,18 +2,18 @@
 #define BASE_HPP
 
 #include "../include/FilaEncadeada.hpp"
-#include "../include/FilaRobos.hpp"
+#include "../include/ListaRobos.hpp"
 
 class Base
 {
 public:
     Base();
-    void SetBase(std::string **mapa, int x, int y, FilaEncadeada FilaDeComandos, FilaRobos Robos);
-    void SetRobos(FilaRobos Robos);
-    void setMapa(std::string mapa, int x, int y);
+    void SetBase(std::string **mapa, FilaEncadeada FilaDeComandos, ListaRobos Robos);
+    void SetRobos(ListaRobos Robos);
+    void setMapa(std::string **mapa);
 
-    FilaRobos Robos;
-    FilaEncadeada FileDeComandos;
+    ListaRobos Robos;
+    FilaEncadeada FilaDeComandos;
     std::string **mapa;
 };
 

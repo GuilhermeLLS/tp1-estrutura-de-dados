@@ -16,7 +16,10 @@ public:
     void setColunaY(int colunaY);
     void SetCommand(std::string nome, int numRobo, int linhaX, int colunaY);
     void Imprime();
-
+    std::string GetNome();
+    int GetLinhaX();
+    int GetColunaY();
+    int GetNumRoboCommand();
 private:
     std::string nome;
     int numRobo;
