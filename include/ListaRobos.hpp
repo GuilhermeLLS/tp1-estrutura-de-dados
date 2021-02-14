@@ -2,6 +2,8 @@
 #define LISTAROBOS_HPP
 
 #include "Robo.hpp"
+#include "../include/FilaEncadeada.hpp"
+#include "../include/Command.hpp"
 
 class ListaRobos
 {
@@ -29,6 +31,12 @@ public:
     int GetColunaYRobo(int pos);
     void UpdateTotalRecursos(int valor, int pos);
     void UpdateTotalAliens(int valor, int pos);
+    bool isRoboAtivo(int pos);
+    int GetTotalAliens(int pos);
+    int GetTotalRecursos(int pos);
+    FilaEncadeada GetOrdensDeComando(int pos);
+    void UpdateOrdensDeComando(int pos, Command item);
+    void ImprimeRelatorio(int pos);
 
 protected:
     int tamanho;

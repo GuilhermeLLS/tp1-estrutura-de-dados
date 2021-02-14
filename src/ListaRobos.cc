@@ -1,5 +1,6 @@
 #include "../include/ListaRobos.hpp"
 #include "../include/Robo.hpp"
+#include "../include/Command.hpp"
 
 Robo ListaRobos::GetDado(int pos)
 {
@@ -17,6 +18,21 @@ void ListaRobos::SetDado(Robo dado, int pos)
         throw "ERRO: POSICAO INVALIDA!";
     }
     this->dados[pos - 1] = dado;
+}
+
+bool ListaRobos::isRoboAtivo(int pos)
+{
+    return this->dados[pos].ativo == true;
+}
+
+int ListaRobos::GetTotalAliens(int pos)
+{
+    return this->dados[pos].totalAliens;
+}
+
+int ListaRobos::GetTotalRecursos(int pos)
+{
+    return this->dados[pos].totalRecursos;
 }
 
 void ListaRobos::InsereInicio(Robo dado)
@@ -145,6 +161,10 @@ int ListaRobos::GetLinhaXRobo(int pos)
     return this->dados[pos].linhaX;
 }
 
+void ListaRobos::ImprimeRelatorio(int pos) {
+    this->dados[pos].ImprimeRelatorio();
+}
+
 int ListaRobos::GetColunaYRobo(int pos)
 {
     return this->dados[pos].colunaY;
@@ -164,8 +184,19 @@ void ListaRobos::Imprime()
 {
     for (int i = 0; i < this->GetTamanho(); i++)
     {
+        std::cout << "--------------------" << std::endl;
         this->dados[i].ImprimeRobo();
     }
+}
+
+FilaEncadeada ListaRobos::GetOrdensDeComando(int pos)
+{
+    return this->dados[pos].OrdensDeComando;
+}
+
+void ListaRobos::UpdateOrdensDeComando(int pos, Command item)
+{
+    this->dados[pos].OrdensDeComando.Enfilera(item);
 }
 
 Robo ListaRobos::Pesquisa(int numRobo)

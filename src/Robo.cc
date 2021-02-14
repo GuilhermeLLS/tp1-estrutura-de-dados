@@ -11,7 +11,7 @@ Robo::Robo()
     this->totalAliens = 0;
 }
 
-void Robo::SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens)
+void Robo::SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens, FilaEncadeada OrdensDeComando)
 {
     this->numRobo = numRobo;
     this->linhaX = linhaX;
@@ -20,6 +20,7 @@ void Robo::SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string
     this->relatorio = relatorio;
     this->totalRecursos = totalRecursos;
     this->totalAliens = totalAliens;
+    this->OrdensDeComando = OrdensDeComando;
 }
 
 void Robo::SetNumRobo(int numRobo)
@@ -33,11 +34,13 @@ void Robo::SetCoordenadas(int linhaX, int colunaY)
     this->colunaY = colunaY;
 }
 
-int Robo::GetNumRobo() {
+int Robo::GetNumRobo()
+{
     return this->numRobo;
 }
 
-void Robo::ImprimeRobo() {
+void Robo::ImprimeRobo()
+{
     std::cout << "Num: " << this->numRobo << std::endl;
     std::cout << "LinhaX: " << this->linhaX << std::endl;
     std::cout << "ColunaY: " << this->colunaY << std::endl;
@@ -65,6 +68,8 @@ void Robo::SetRelatorio(std::string relatorio)
 {
     this->relatorio = this->relatorio + relatorio + ";";
 }
+
+void Robo::SetOrdensDeComando(FilaEncadeada ordensDeComando) { this->OrdensDeComando = ordensDeComando; }
 
 void Robo::ImprimeRelatorio()
 {

@@ -5,15 +5,15 @@
 
 Base::Base()
 {
-    this->FilaDeComandos = FilaEncadeada();
+    this->FilaDeOrdensDiretas = FilaEncadeada();
     this->mapa;
     this->Robos = ListaRobos();
 }
 
-void Base::SetBase(std::string **mapa, FilaEncadeada FilaDeComandos, ListaRobos Robos)
+void Base::SetBase(std::string **mapa, FilaEncadeada FilaDeOrdensDiretas, ListaRobos Robos)
 {
     this->mapa = mapa;
-    this->FilaDeComandos = FilaDeComandos;
+    this->FilaDeOrdensDiretas = FilaDeOrdensDiretas;
     this->Robos = Robos;
 }
 
@@ -21,3 +21,24 @@ void Base::SetRobos(ListaRobos Robos)
 {
     this->Robos = Robos;
 }
+
+void Base::SetRelatorio(std::string relatorio)
+{
+    this->relatorio = this->relatorio + relatorio + ";";
+}
+
+void Base::SetMapa(std::string **mapa) { this->mapa = mapa; }
+
+void Base::ImprimeRelatorio()
+{
+    std::string relatorioAux = this->relatorio;
+    std::cout << "TODO: IMPRIMIR RELATORIO" << std::endl;
+}
+
+int Base::GetTotalAliensBase() { return this->totalAliens; }
+
+int Base::GetTotalRecursosBase() { return this->totalRecursos; }
+
+void Base::UpdateTotalAliensBase(int valor) { this->totalAliens += valor; }
+
+void Base::UpdateTotalRecursosBase(int valor) { this->totalRecursos += valor; }
