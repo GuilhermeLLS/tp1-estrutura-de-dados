@@ -141,11 +141,13 @@ int main(int argc, char *argv[])
     }
 
     // executa fila de ordens diretas
-    while (!BaseEspacial.FilaDeOrdensDiretas.Vazia())
+    std::cout << BaseEspacial.FilaDeOrdensDiretas.GetTamanho() << std::endl;
+    int tamanhoOrdensDiretas = BaseEspacial.FilaDeOrdensDiretas.GetTamanho();
+    while (tamanhoOrdensDiretas > 0)
     {
-        // std::cout << BaseEspacial.FilaDeOrdensDiretas.GetTamanho() << std::endl;
+        std::cout << tamanhoOrdensDiretas << std::endl;
         Command aux = BaseEspacial.FilaDeOrdensDiretas.Desenfilera();
-        // aux.Imprime();
+        aux.Imprime();
         int nRobs = aux.GetNumRoboCommand();
         std::string nomeOrdemDireta = aux.GetNome();
         if (nomeOrdemDireta == "ATIVAR")
@@ -153,11 +155,11 @@ int main(int argc, char *argv[])
             BaseEspacial.Robos.SetRoboActive(nRobs);
             BaseEspacial.SetRelatorio("ROBO" + std::to_string(nRobs) + "SAIU EM MISSAO");
         }
-        if (nomeOrdemDireta == "RELATORIO")
+        else if (nomeOrdemDireta == "RELATORIO")
         {
             BaseEspacial.Robos.ImprimeRelatorio(nRobs);
         }
-        if (nomeOrdemDireta == "RETORNAR")
+        else if (nomeOrdemDireta == "RETORNAR")
         {
             if (BaseEspacial.Robos.isRoboAtivo(nRobs))
             {
@@ -169,75 +171,80 @@ int main(int argc, char *argv[])
             }
         }
         // EXECUTA FILA DE ORDENS DE COMANDO
-        if (nomeOrdemDireta == "EXECUTAR")
+        else if (nomeOrdemDireta == "EXECUTAR")
         {
             FilaEncadeada ordensDeComando = BaseEspacial.Robos.GetOrdensDeComando(nRobs);
-            Command aux;
+            Command *auxCom;
             // unfortunate gambiarra
             int tam = ordensDeComando.GetTamanho();
-            while (tam >= 0)
+            std::cout << "ordens de comando tam: " << tam << std::endl;
+            while (tam > 0)
             {
-                if(tam == 0) return -1;
-                std::cout << "=================" << std::endl;
-                std::cout << tam << std::endl;
-                aux = ordensDeComando.Desenfilera();
-                aux.Imprime();
-                std::cout << ordensDeComando.GetTamanho() << std::endl;
+                std::cout << "entrei" << std::endl;
+                if (tam == 0)
+                {
+                    std::cout << "bosta" << std::endl;
+                    return -1;
+                }
+                std::cout << ordensDeComando.Vazia() << std::endl;
+                // ! the line below line breaks everything
+                // auxCom = ordensDeComando.Desenfilera();
                 // seja o que deus quiser
-                if (nomeOrdemDireta == "MOVER")
-                {
-                    int linha = aux.GetLinhaX();
-                    int coluna = aux.GetColunaY();
-                    BaseEspacial.Robos.SetPosicoesRobo(linha, coluna, nRobs);
-                    std::string elemInPosition = BaseEspacial.mapa[linha][coluna];
-                    if (elemInPosition == "O")
-                    {
-                        BaseEspacial.Robos.UpdateRelatorio("IMPOSSIVEL MOVER PARA (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
-                    }
-                    else
-                    {
-                        BaseEspacial.Robos.UpdateRelatorio("MOVEU PARA (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
-                    }
-                }
-                if (nomeOrdemDireta == "COLETAR")
-                {
-                    int linha = BaseEspacial.Robos.GetLinhaXRobo(nRobs);
-                    int coluna = BaseEspacial.Robos.GetColunaYRobo(nRobs);
-                    std::string elemInPosition = BaseEspacial.mapa[linha][coluna];
-                    if (elemInPosition == "R")
-                    {
-                        BaseEspacial.Robos.UpdateRelatorio("RECURSOS COLETADOS EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
-                        BaseEspacial.Robos.UpdateTotalRecursos(1, nRobs);
-                        BaseEspacial.UpdateTotalRecursosBase(1);
-                        BaseEspacial.mapa[linha][coluna] = ".";
-                    }
-                    else
-                    {
-                        BaseEspacial.Robos.UpdateRelatorio("IMPOSSIVEL COLETAR RECURSOS EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
-                    }
-                }
-                if (nomeOrdemDireta == "ELIMINAR")
-                {
-                    int linha = BaseEspacial.Robos.GetLinhaXRobo(nRobs);
-                    int coluna = BaseEspacial.Robos.GetColunaYRobo(nRobs);
-                    std::string elemInPosition = BaseEspacial.mapa[linha][coluna];
-                    if (elemInPosition == "H")
-                    {
-                        BaseEspacial.Robos.UpdateRelatorio("ALIEN ELIMINADO EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
-                        BaseEspacial.Robos.UpdateTotalAliens(1, nRobs);
-                        BaseEspacial.UpdateTotalAliensBase(1);
-                        BaseEspacial.mapa[linha][coluna] = ".";
-                    }
-                    else
-                    {
-                        BaseEspacial.Robos.UpdateRelatorio("IMPOSSIVEL ELIMINAR ALIEN EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
-                    }
-                }
+                // if (nomeOrdemDireta == "MOVER")
+                // {
+                // int linha = auxCom.GetLinhaX();
+                // int coluna = auxCom.GetColunaY();
+                // BaseEspacial.Robos.SetPosicoesRobo(linha, coluna, nRobs);
+                // std::string elemInPosition = BaseEspacial.mapa[linha][coluna];
+                // if (elemInPosition == "O")
+                // {
+                // BaseEspacial.Robos.UpdateRelatorio("IMPOSSIVEL MOVER PARA (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
+                // }
+                // else
+                // {
+                // BaseEspacial.Robos.UpdateRelatorio("MOVEU PARA (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
+                // }
+                // }
+                // if (nomeOrdemDireta == "COLETAR")
+                // {
+                // int linha = BaseEspacial.Robos.GetLinhaXRobo(nRobs);
+                // int coluna = BaseEspacial.Robos.GetColunaYRobo(nRobs);
+                // std::string elemInPosition = BaseEspacial.mapa[linha][coluna];
+                // if (elemInPosition == "R")
+                // {
+                // BaseEspacial.Robos.UpdateRelatorio("RECURSOS COLETADOS EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
+                // BaseEspacial.Robos.UpdateTotalRecursos(1, nRobs);
+                // BaseEspacial.UpdateTotalRecursosBase(1);
+                // BaseEspacial.mapa[linha][coluna] = ".";
+                // }
+                // else
+                // {
+                // BaseEspacial.Robos.UpdateRelatorio("IMPOSSIVEL COLETAR RECURSOS EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
+                // }
+                // }
+                // if (nomeOrdemDireta == "ELIMINAR")
+                // {
+                // int linha = BaseEspacial.Robos.GetLinhaXRobo(nRobs);
+                // int coluna = BaseEspacial.Robos.GetColunaYRobo(nRobs);
+                // std::string elemInPosition = BaseEspacial.mapa[linha][coluna];
+                // if (elemInPosition == "H")
+                // {
+                // BaseEspacial.Robos.UpdateRelatorio("ALIEN ELIMINADO EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
+                // BaseEspacial.Robos.UpdateTotalAliens(1, nRobs);
+                // BaseEspacial.UpdateTotalAliensBase(1);
+                // BaseEspacial.mapa[linha][coluna] = ".";
+                // }
+                // else
+                // {
+                // BaseEspacial.Robos.UpdateRelatorio("IMPOSSIVEL ELIMINAR ALIEN EM (" + std::to_string(linha) + "," + std::to_string(coluna) + ")", nRobs);
+                // }
+                // }
                 tam--;
             }
         }
+        tamanhoOrdensDiretas--;
     }
-    BaseEspacial.Robos.Imprime();
+    // BaseEspacial.Robos.Imprime();
 
     free(map);
     return 0;

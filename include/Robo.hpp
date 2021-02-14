@@ -21,6 +21,7 @@ public:
     void ImprimeRelatorio();
     int GetNumRobo();
     void ImprimeRobo();
+    FilaEncadeada GetOrdensDeComando();
     void SetOrdensDeComando(FilaEncadeada ordensDeComando);
 
 protected:

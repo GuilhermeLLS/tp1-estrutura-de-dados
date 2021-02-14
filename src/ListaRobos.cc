@@ -161,7 +161,8 @@ int ListaRobos::GetLinhaXRobo(int pos)
     return this->dados[pos].linhaX;
 }
 
-void ListaRobos::ImprimeRelatorio(int pos) {
+void ListaRobos::ImprimeRelatorio(int pos)
+{
     this->dados[pos].ImprimeRelatorio();
 }
 
@@ -191,11 +192,12 @@ void ListaRobos::Imprime()
 
 FilaEncadeada ListaRobos::GetOrdensDeComando(int pos)
 {
-    return this->dados[pos].OrdensDeComando;
+    return this->dados[pos].GetOrdensDeComando();
 }
 
 void ListaRobos::UpdateOrdensDeComando(int pos, Command item)
 {
+    item.Imprime();
     this->dados[pos].OrdensDeComando.Enfilera(item);
 }
 

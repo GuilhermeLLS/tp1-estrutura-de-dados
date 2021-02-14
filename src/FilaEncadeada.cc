@@ -16,7 +16,7 @@ void FilaEncadeada::Enfilera(Command dado)
     novo->dado = dado;
     fim->proximo = novo;
     fim = novo;
-    std::cout << " aqui" << std::endl;
+
     this->tamanho++;
 }
 

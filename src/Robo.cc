@@ -9,6 +9,7 @@ Robo::Robo()
     this->relatorio = "";
     this->totalRecursos = 0;
     this->totalAliens = 0;
+    this->OrdensDeComando = FilaEncadeada();
 }
 
 void Robo::SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens, FilaEncadeada OrdensDeComando)
@@ -71,12 +72,15 @@ void Robo::SetRelatorio(std::string relatorio)
 
 void Robo::SetOrdensDeComando(FilaEncadeada ordensDeComando) { this->OrdensDeComando = ordensDeComando; }
 
+FilaEncadeada Robo::GetOrdensDeComando() { return this->OrdensDeComando; }
+
 void Robo::ImprimeRelatorio()
 {
     std::string delimiter = ";";
     std::string aux = this->relatorio;
     size_t pos = 0;
     std::string token;
+    std::cout << "aqui" << this->relatorio << std::endl;
     std::ofstream file("saida.txt");
     while ((pos = aux.find(delimiter)) != std::string::npos)
     {
