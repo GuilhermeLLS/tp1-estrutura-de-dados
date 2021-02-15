@@ -2,6 +2,10 @@
 #include "../include/Robo.hpp"
 #include "../include/Command.hpp"
 
+ListaRobos::ListaRobos()
+{
+    this->tamanho = 0;
+}
 Robo ListaRobos::GetDado(int pos)
 {
     if (pos > this->GetTamanho() || pos <= 0)
@@ -63,9 +67,18 @@ void ListaRobos::InsereFinal(Robo dado)
     {
         throw "ERRO: Lista cheia!";
     }
-    this->dados[this->GetTamanho()] = dado;
+    int pos = this->GetTamanho();
+    this->dados[pos] = dado;
     this->IncrementaTamanho();
 }
+
+int ListaRobos::GetTamanho()
+{
+    return this->tamanho;
+}
+
+void ListaRobos::IncrementaTamanho() { this->tamanho++; }
+void ListaRobos::DecrementaTamanho() { this->tamanho--; }
 
 void ListaRobos::InserePosicao(Robo dado, int pos)
 {
@@ -190,15 +203,14 @@ void ListaRobos::Imprime()
     }
 }
 
-FilaEncadeada ListaRobos::GetOrdensDeComando(int pos)
+FilaEncadeada *ListaRobos::GetOrdensDeComando(int pos)
 {
     return this->dados[pos].GetOrdensDeComando();
 }
 
 void ListaRobos::UpdateOrdensDeComando(int pos, Command item)
 {
-    item.Imprime();
-    this->dados[pos].OrdensDeComando.Enfilera(item);
+    this->dados[pos].OrdensDeComando->Enfilera(item);
 }
 
 Robo ListaRobos::Pesquisa(int numRobo)

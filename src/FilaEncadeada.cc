@@ -1,10 +1,11 @@
+#include <regex>
 #include "../include/FilaEncadeada.hpp"
 #include "../include/Node.hpp"
 
 FilaEncadeada::FilaEncadeada()
 {
-    frente = new Node();
-    fim = frente;
+    this->frente = new Node();
+    this->fim = this->frente;
     this->tamanho = 0;
 }
 
@@ -13,10 +14,30 @@ void FilaEncadeada::Enfilera(Command dado)
     Node *novo;
     novo = new Node();
 
-    novo->dado = dado;
-    fim->proximo = novo;
-    fim = novo;
-
+    if (Vazia())
+    {
+        this->frente->proximo = novo;
+        novo->proximo = NULL;
+    }
+    if (dado.GetPrioridade())
+    {
+        // std::cout << "prioridade" << std::endl;
+        // novo->dado = dado;
+        // novo->proximo = frente->proximo;
+        // this->frente->proximo = novo;
+        novo->dado = dado;
+        novo->proximo = this->frente->proximo;
+        this->frente->proximo = novo;
+        // Node *aux = new Node();
+        // aux->dado = dado;
+        // this->frente->proximo = aux;
+    }
+    else
+    {
+        novo->dado = dado;
+        this->fim->proximo = novo;
+        this->fim = novo;
+    }
     this->tamanho++;
 }
 
@@ -29,8 +50,8 @@ Command FilaEncadeada::Desenfilera()
     Command aux;
     Node *p;
 
-    p = frente->proximo;
-    frente->proximo = p->proximo;
+    p = this->frente->proximo;
+    this->frente->proximo = p->proximo;
 
     aux = p->dado;
     delete p;

@@ -11,7 +11,7 @@ class Robo
 {
 public:
     Robo();
-    void SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens, FilaEncadeada OrdensDeComando);
+    void SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens, FilaEncadeada *OrdensDeComando);
     void SetNumRobo(int num);
     void SetCoordenadas(int linhaX, int colunaY);
     void SetAtivo();
@@ -21,8 +21,8 @@ public:
     void ImprimeRelatorio();
     int GetNumRobo();
     void ImprimeRobo();
-    FilaEncadeada GetOrdensDeComando();
-    void SetOrdensDeComando(FilaEncadeada ordensDeComando);
+    FilaEncadeada *GetOrdensDeComando();
+    void SetOrdensDeComando(FilaEncadeada *ordensDeComando);
 
 protected:
     int numRobo;
@@ -32,7 +32,7 @@ protected:
     std::string relatorio;
     int totalRecursos;
     int totalAliens;
-    FilaEncadeada OrdensDeComando;
+    FilaEncadeada *OrdensDeComando;
 
     friend class ListaRobos;
 };

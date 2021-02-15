@@ -8,10 +8,10 @@
 class ListaRobos
 {
 public:
-    ListaRobos() { tamanho = 0; };
-    int GetTamanho() { return tamanho; };
-    void IncrementaTamanho() { tamanho++; };
-    void DecrementaTamanho() { tamanho--; };
+    ListaRobos();
+    int GetTamanho();
+    void IncrementaTamanho();
+    void DecrementaTamanho();
     bool Vazia() { return tamanho == 0; };
     Robo GetDado(int pos);
     void SetRoboActive(int pos);
@@ -24,7 +24,6 @@ public:
     Robo RemovePosicao(int pos);
     void Imprime();
     Robo Pesquisa(int chave);
-    void Limpa();
     void SetPosicoesRobo(int linha, int coluna, int pos);
     void UpdateRelatorio(std::string message, int pos);
     int GetLinhaXRobo(int pos);
@@ -34,11 +33,10 @@ public:
     bool isRoboAtivo(int pos);
     int GetTotalAliens(int pos);
     int GetTotalRecursos(int pos);
-    FilaEncadeada GetOrdensDeComando(int pos);
+    FilaEncadeada *GetOrdensDeComando(int pos);
     void UpdateOrdensDeComando(int pos, Command item);
     void ImprimeRelatorio(int pos);
 
-protected:
     int tamanho;
 
 private:

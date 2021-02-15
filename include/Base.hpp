@@ -8,8 +8,8 @@ class Base
 {
 public:
     Base();
-    void SetBase(std::string **mapa, FilaEncadeada FilaDeOrdensDiretas, ListaRobos Robos);
-    void SetRobos(ListaRobos Robos);
+    void SetBase(std::string **mapa, ListaRobos *Robos);
+    void SetRobos(ListaRobos *Robos);
     void SetMapa(std::string **mapa);
     void SetRelatorio(std::string relatorio);
     void ImprimeRelatorio();
@@ -17,13 +17,14 @@ public:
     int GetTotalAliensBase();
     void UpdateTotalAliensBase(int valor);
     void UpdateTotalRecursosBase(int valor);
+    void ResetaRelatorio();
 
-    ListaRobos Robos;
-    FilaEncadeada FilaDeOrdensDiretas;
+    ListaRobos *Robos;
+    FilaEncadeada *FilaDeOrdensDiretas;
     std::string **mapa;
     std::string relatorio;
-    int totalRecursos = 0;
-    int totalAliens = 0;
+    int totalRecursosBase = 0;
+    int totalAliensBase = 0;
 };
 
 #endif

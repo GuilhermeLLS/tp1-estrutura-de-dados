@@ -9,10 +9,10 @@ Robo::Robo()
     this->relatorio = "";
     this->totalRecursos = 0;
     this->totalAliens = 0;
-    this->OrdensDeComando = FilaEncadeada();
+    this->OrdensDeComando = new FilaEncadeada();
 }
 
-void Robo::SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens, FilaEncadeada OrdensDeComando)
+void Robo::SetRobo(int numRobo, int linhaX, int colunaY, bool ativo, std::string relatorio, int totalRecursos, int totalAliens, FilaEncadeada *OrdensDeComando)
 {
     this->numRobo = numRobo;
     this->linhaX = linhaX;
@@ -70,9 +70,9 @@ void Robo::SetRelatorio(std::string relatorio)
     this->relatorio = this->relatorio + relatorio + ";";
 }
 
-void Robo::SetOrdensDeComando(FilaEncadeada ordensDeComando) { this->OrdensDeComando = ordensDeComando; }
+void Robo::SetOrdensDeComando(FilaEncadeada *ordensDeComando) { this->OrdensDeComando = ordensDeComando; }
 
-FilaEncadeada Robo::GetOrdensDeComando() { return this->OrdensDeComando; }
+FilaEncadeada *Robo::GetOrdensDeComando() { return this->OrdensDeComando; }
 
 void Robo::ImprimeRelatorio()
 {
@@ -80,13 +80,13 @@ void Robo::ImprimeRelatorio()
     std::string aux = this->relatorio;
     size_t pos = 0;
     std::string token;
-    std::cout << "aqui" << this->relatorio << std::endl;
-    std::ofstream file("saida.txt");
+    std::ofstream file("saida.txt", std::ofstream::app);
     while ((pos = aux.find(delimiter)) != std::string::npos)
     {
         token = aux.substr(0, pos);
         std::cout << token << std::endl;
-        file << token;
+        std::string num = std::to_string(GetNumRobo());
+        file << "ROBO " << num << ": " << token <<"\n";
         aux.erase(0, pos + delimiter.length());
     }
     file.close();

@@ -14,7 +14,7 @@ public:
     void Limpa();
 
 protected:
-    int tamanho = 0;
+    int tamanho;
 
 private:
     Node *frente;
