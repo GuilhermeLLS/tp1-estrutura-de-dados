@@ -6,6 +6,16 @@ ListaRobos::ListaRobos()
 {
     this->tamanho = 0;
 }
+
+void ListaRobos::SetRoboInactive(int pos)
+{
+    this->dados[pos].ativo = false;
+}
+
+void ListaRobos::ResetaRelatorio(int pos) {
+    this->dados[pos].relatorio = "";
+}
+
 Robo ListaRobos::GetDado(int pos)
 {
     if (pos > this->GetTamanho() || pos <= 0)

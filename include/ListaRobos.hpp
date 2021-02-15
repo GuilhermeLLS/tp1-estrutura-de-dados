@@ -36,6 +36,8 @@ public:
     FilaEncadeada *GetOrdensDeComando(int pos);
     void UpdateOrdensDeComando(int pos, Command item);
     void ImprimeRelatorio(int pos);
+    void SetRoboInactive(int pos);
+    void ResetaRelatorio(int pos);
 
     int tamanho;
 

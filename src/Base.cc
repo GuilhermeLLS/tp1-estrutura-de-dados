@@ -59,14 +59,10 @@ int Base::GetTotalRecursosBase() { return this->totalRecursosBase; }
 
 void Base::UpdateTotalAliensBase(int valor)
 {
-    std::cout << this->totalAliensBase << std::endl;
-    this->totalAliensBase ++;
-    std::cout << this->totalAliensBase << std::endl;
+    this->totalAliensBase += valor;
 }
 
 void Base::UpdateTotalRecursosBase(int valor)
 {
-    std::cout << this->totalRecursosBase << std::endl;
-    this->totalRecursosBase ++;
-    std::cout << this->totalRecursosBase << std::endl;
+    this->totalRecursosBase += valor;
 }
